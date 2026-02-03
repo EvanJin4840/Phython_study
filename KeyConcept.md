@@ -17,3 +17,8 @@ name = "John"  # String
 price = 9.99   # Float
 ```
 * Type annotations (also called "type hints") are a Python feature that let you explicitly specify the expected data types of variables, function parameters, and return values. They were introduced in Python 3.5 (PEP 484) to bring optional static typing to Python's dynamically typed nature.
+
+#### Iterators and Generators
+
+- Iterators are objects that can be looped over, implementing __iter__() and __next__() methods. Generators use the yield keyword to produce values on-demand, making them memory-efficient for large datasets:
+- Generators are useful when processing large files or infinite sequences without loading everything into memory.
