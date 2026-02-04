@@ -22,3 +22,9 @@ price = 9.99   # Float
 
 - Iterators are objects that can be looped over, implementing __iter__() and __next__() methods. Generators use the yield keyword to produce values on-demand, making them memory-efficient for large datasets:
 - Generators are useful when processing large files or infinite sequences without loading everything into memory.
+
+### Decorators
+
+- A decorator is a higher‑order function that takes another function as input, wraps it inside an inner function (often called wrapper) where it can run extra code before and/or after the original function call, and then returns this wrapper as the new version of the function.
+- Using the @decorator_name syntax above a function definition is just shorthand for “pass this function into the decorator and replace it with the decorated version.”
+This lets you add reusable cross‑cutting features like logging, timing, authentication checks, caching, or validation to many functions, without changing their original bodies and while keeping their core logic clean.
