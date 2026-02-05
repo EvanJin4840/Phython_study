@@ -53,3 +53,32 @@ with my_resource():
     print("using resource")
 ```
 Everything before yield acts as __enter__, and everything after acts as __exit__. Context managers created this way can also be used as function decorators.
+
+### Metaclasses
+
+- A metaclass is a "class of a class" - it defines how classes are created, just as a class defines how objects are created. The relationship is:
+
+``Metaclass creates → Class creates → Object``
+
+- By default, all Python classes are instances of the built-in type metaclass. You can create custom metaclasses by inheriting from type and overriding methods like __new__ (runs when the class is being created) or __init__ (runs after class creation):
+
+
+``` python
+class MyMeta(type):
+    def __new__(cls, name, bases, attrs):
+        print(f"Creating class: {name}")
+        attrs['injected'] = 42  # Add attribute to every class
+        return super().__new__(cls, name, bases, attrs)
+class MyClass(metaclass=MyMeta):
+    pass
+print(MyClass.injected)  # 42
+```
+
+* Common use cases:
+- Singleton patterns
+- Abstract base classes (ABC)
+- ORM frameworks (Django models, SQLAlchemy)
+- Automatic code generation (like dataclasses)
+- Enforcing coding standards or conventions
+
+* Important caveat: Metaclasses are advanced magic that 99% of developers don't need. If you're wondering whether you need a metaclass, you probably don't - decorators or class decorators usually suffice. Metaclasses are primarily used in frameworks and libraries, not application code.
