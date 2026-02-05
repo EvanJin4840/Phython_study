@@ -28,3 +28,28 @@ price = 9.99   # Float
 - A decorator is a higher‑order function that takes another function as input, wraps it inside an inner function (often called wrapper) where it can run extra code before and/or after the original function call, and then returns this wrapper as the new version of the function.
 - Using the @decorator_name syntax above a function definition is just shorthand for “pass this function into the decorator and replace it with the decorated version.”
 This lets you add reusable cross‑cutting features like logging, timing, authentication checks, caching, or validation to many functions, without changing their original bodies and while keeping their core logic clean.
+
+### context managers
+
+- A context manager is a Python object that manages resources (files, database connections, locks, etc.) by automatically handling setup and cleanup around a block of code. You use it with the with statement, and it guarantees that cleanup code runs even if the block raises an exception or exits early.
+
+- Internally, context managers implement __enter__ (runs when entering the block) and __exit__ (runs when leaving the block, regardless of how). This abstracts the try...finally pattern for resource management.
+
+Key difference from decorators:
+- Decorators modify or replace a function/class at definition time
+- Context managers execute setup/teardown code around a runtime block
+
+* Creating context managers easily:
+- Instead of writing a class with __enter__/__exit__, you can use the @contextmanager decorator from contextlib on a generator function that yields exactly once
+from contextlib import contextmanager
+
+``` @contextmanager
+def my_resource():
+    print("acquire")    # before yield = __enter__
+    yield              # with block runs here
+    print("release")   # after yield = __exit__
+
+with my_resource():
+    print("using resource")
+```
+Everything before yield acts as __enter__, and everything after acts as __exit__. Context managers created this way can also be used as function decorators.
