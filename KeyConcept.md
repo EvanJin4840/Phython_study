@@ -82,3 +82,14 @@ print(MyClass.injected)  # 42
 - Enforcing coding standards or conventions
 
 * Important caveat: Metaclasses are advanced magic that 99% of developers don't need. If you're wondering whether you need a metaclass, you probably don't - decorators or class decorators usually suffice. Metaclasses are primarily used in frameworks and libraries, not application code.
+
+* Multithreading runs multiple threads within a single process that share the same memory space. Due to Python's Global Interpreter Lock (GIL), only one thread executes at a time, providing concurrency but not true parallelism. It's ideal for I/O-bound tasks (file operations, network requests, database queries) where threads can work on other tasks while waiting.
+
+* Multiprocessing creates separate processes, each with its own Python interpreter and memory space. This bypasses the GIL and enables true parallelism across multiple CPU cores. It's best for CPU-bound tasks (heavy computations, data processing, image/video processing) but has higher overhead due to process creation and memory duplication.
+
+### Multithreading and Multiprocessing
+
+* Quick decision guide:
+
+- I/O-bound (waiting for external resources) → Use multithreading
+- CPU-bound (intensive calculations) → Use multiprocessing
